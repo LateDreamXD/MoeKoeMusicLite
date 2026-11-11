@@ -1,0 +1,15 @@
+{
+  "$schema": "https://tinyjs.app/schema/tinyjs.schema.json",
+  "name": "MoeKoeMusic Lite",
+  "title": "MoeKoeMusic Lite",
+  "size": "1024x768",
+  "id": "cn.moekoe.music.lite",
+  "version": "0.1.0",
+  "backend": "backend/main.ts",
+  "frontend": {
+    "build": "pnpm run build",
+    "dist": "dist",
+    "dev": "pnpm run dev",
+    "devUrl": "http://127.0.0.1:5173"
+  }
+}

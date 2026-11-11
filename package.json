@@ -1,0 +1,25 @@
+{
+  "name": "moekoemusic-lite",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "api": "pnpm run -C api start --platform=lite --port=9430",
+    "frontend": "pnpm run -C frontend dev",
+    "dev": "run-p api frontend",
+    "build": "pnpm run -C frontend build"
+  },
+  "devDependencies": {
+    "@latedream/moekoe-latelib-types": "^0.1.0",
+    "@types/node": "^24.19.2",
+    "npm-run-all2": "^9.0.4",
+    "typescript": "~6.0.3"
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "^12.18.0",
+      "onFail": "download"
+    }
+  }
+}
