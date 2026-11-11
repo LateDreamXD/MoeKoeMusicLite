@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "license": "MIT",
   "scripts": {
     "api": "pnpm run -C api start --platform=lite --port=9430",
     "frontend": "pnpm run -C frontend dev",
