@@ -1,0 +1,35 @@
+name: Build
+
+on:
+  push:
+    branches: ['main']
+  pull_request:
+    branches: ['main']
+
+jobs:
+  build-and-upload:
+    name: Build and Upload
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          submodules: true
+
+      - name: Setup PNPM + Node.js
+        uses: pnpm/setup@v3
+        with:
+          runtime: node@lts
+          require-lockfile: true
+          cache: true
+
+      - name: Build
+        uses: DreamLateXD/tinyjs-build-action@v1
+        with:
+          name: 'MoeKoeMusicLite'
+          publish: false
+          upload-artifact: true
