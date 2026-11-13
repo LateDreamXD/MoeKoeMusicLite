@@ -2,7 +2,7 @@ packages:
   - api
   - frontend
 allowBuilds:
-  '@parcel/watcher': set this to true or false
+  '@parcel/watcher': false
 overrides:
   axios@1.20.0>follow-redirects: 1.16.2
   express@4.22.3>body-parser: 1.20.9
