@@ -2,14 +2,19 @@ import { createTray, onTray } from './modules/tray';
 import { registerHotkeys, onHotkey } from './modules/hotkey';
 import { playStartupSound } from './modules/startup-sound';
 import { openDesktopLyc } from './modules/desktop-lyc';
+import { startApiService } from './modules/api-service';
 import defaultSettings from '@/data/defaultSettings.json';
 
+import { type MoeKoeSettings } from '@latedream/moekoe-latelib-types';
+
 const init = async (app: TinyApp) => {
-	let settings: typeof defaultSettings = await app.store.get('settings');
+	let settings: MoeKoeSettings = await app.store.get('settings');
 	if(!settings) {
 		app.store.set('settings', defaultSettings);
-		settings = defaultSettings;
+		settings = defaultSettings as MoeKoeSettings;
 	}
+
+	await startApiService(app, settings);
 
 	createTray(app);
 

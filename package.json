@@ -5,13 +5,15 @@
   "type": "module",
   "license": "MIT",
   "scripts": {
-    "api": "pnpm run -C api start --platform=lite --port=9430",
-    "frontend": "pnpm run -C frontend dev",
-    "dev": "run-p api frontend",
-    "build": "pnpm run -C frontend build"
+    "dev": "run-p api:build frontend:dev",
+    "build": "run-p api:build frontend:build",
+    "api:build": "node bin/build-api.js",
+    "frontend:dev": "pnpm run -C frontend dev",
+    "frontend:build": "pnpm run -C frontend build"
   },
   "devDependencies": {
     "@latedream/moekoe-latelib-types": "^0.1.0",
+    "@txikijs/types": "^26.11.0",
     "@types/node": "^24.19.2",
     "npm-run-all2": "^9.0.4",
     "typescript": "~6.0.3"

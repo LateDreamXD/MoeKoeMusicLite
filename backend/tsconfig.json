@@ -6,7 +6,7 @@
     "strict": true,
     "checkJs": false,
     "noEmit": true,
-    "types": [],
+    "types": ["@txikijs/types"],
 
     "paths": {
       "@/*": ["../*"]
@@ -14,5 +14,5 @@
   },
   "include": [
     "./**/*"
-, "modules/tray.ts"  ]
+  ]
 }
