@@ -45,10 +45,8 @@ if(!fs.existsSync(outFile)) {
 }
 
 console.log('copying api exec file');
-const dest = path.join(process.cwd(), 'executables');
-const targetFile = path.join(dest, system === 'win32'? 'api.exe': 'api');
+const targetFile = path.join(process.cwd(), 'executables', system === 'win32'? 'api.exe': 'api');
 if(!fs.existsSync(targetFile)) {
-	fs.cpSync(outFile, dest, { recursive: true });
-	fs.renameSync(path.join(dest, fileName), targetFile);
+	fs.cpSync(outFile, targetFile, { recursive: true });
 }
 console.log('all done!');
