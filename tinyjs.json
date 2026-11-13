@@ -8,8 +8,9 @@
   "backend": "backend/main.ts",
   "frontend": {
     "build": "pnpm run build",
-    "dist": "dist",
+    "dist": "frontend/dist",
     "dev": "pnpm run dev",
     "devUrl": "http://127.0.0.1:5173"
-  }
+  },
+  "debug": true
 }
