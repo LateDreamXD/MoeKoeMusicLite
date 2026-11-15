@@ -10,6 +10,7 @@ const outArg = process.argv[3] || path.join('scripts', 'sec_main.nsh');
 const sectionName = process.argv[4] || 'SEC_MAIN';
 const mainExe = process.argv[5] || 'MoeKoeMusic Lite.exe';
 
+const exclusions = ['publish'];
 const distDir = path.resolve(projectRoot, distArg);
 const outFile = path.resolve(projectRoot, outArg);
 const nsiDir = path.dirname(outFile);
@@ -46,7 +47,8 @@ function scan(dir) {
 	for (const ent of entries) {
 		const full = path.join(dir, ent.name);
 		if (ent.isDirectory()) {
-			node.dirs.set(ent.name, { full, node: scan(full) });
+			if(!exclusions.includes(ent.name))
+				node.dirs.set(ent.name, { full, node: scan(full) });
 		} else if (ent.isFile()) {
 			node.files.push({ name: ent.name, full });
 		} else if (ent.isSymbolicLink()) {
