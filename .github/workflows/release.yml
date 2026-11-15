@@ -1,0 +1,54 @@
+name: Release
+
+permissions:
+  contents: write
+
+on:
+  push:
+    tags: [ 'v*' ]
+
+jobs:
+  build-and-upload:
+    name: Build and Upload
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          submodules: true
+
+      - name: Setup PNPM + Node.js
+        uses: pnpm/setup@v3
+        with:
+          runtime: node@lts
+          require-lockfile: true
+          cache: true
+
+      - name: Build
+        uses: DreamLateXD/tinyjs-build-action@v1
+
+      - name: Setup NSIS
+        if: runner.os == 'Windows'
+        uses: nsis-dev/setup-nsis@v1
+        with:
+          version: 3.12
+
+      - name: Make NSIS Installer
+        if: runner.os == 'Windows'
+        run: |
+          # generate sections
+          node bin/gen-sec-main.js
+          node bin/gen-sec-uninst.js
+
+          makensis scripts/installer.nsi
+
+      - name: Release
+        uses: softprops/action-gh-release@v3
+        with:
+          files: |
+            ./dist/publish/*
+            ./MoeKoe Music Lite_Setup_v*.exe

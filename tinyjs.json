@@ -5,6 +5,10 @@
   "size": "1024x768",
   "id": "cn.moekoe.music.lite",
   "version": "0.1.0",
+  "update": {
+    "url": "https://github.com/LateDreamXD/MoeKoeMusicLite/releases/download/latest/manifest.json",
+    "auto": "launch"
+  },
   "backend": "backend/main.ts",
   "frontend": {
     "build": "pnpm run build",
