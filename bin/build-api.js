@@ -3,6 +3,7 @@ import path from 'node:path';
 import os from 'node:os';
 import { execSync } from 'node:child_process';
 
+const isForce = process.argv.includes('-f') || process.argv.includes('--force');
 const system = os.platform();
 const arch = os.arch();
 
@@ -36,7 +37,7 @@ switch(system) {
 }
 
 const outFile = path.join(outDir, fileName);
-if(!fs.existsSync(outFile)) {
+if(!fs.existsSync(outFile) || isForce) {
 	console.log(`start build api for ${system} ${arch}`);
 	execSync(cmd.join(' '));
 	console.log('api built');
@@ -46,7 +47,7 @@ if(!fs.existsSync(outFile)) {
 
 console.log('copying api exec file');
 const targetFile = path.join(process.cwd(), 'executables', system === 'win32'? 'api.exe': 'api');
-if(!fs.existsSync(targetFile)) {
+if(!fs.existsSync(targetFile) || isForce) {
 	fs.cpSync(outFile, targetFile, { recursive: true });
 }
 console.log('all done!');
