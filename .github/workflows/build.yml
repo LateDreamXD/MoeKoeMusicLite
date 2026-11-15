@@ -30,6 +30,6 @@ jobs:
       - name: Build
         uses: DreamLateXD/tinyjs-build-action@v1
         with:
-          name: 'MoeKoeMusicLite'
+          name: MoeKoeMusicLite-${{ runner.os }}.zip
           publish: false
           upload-artifact: true
